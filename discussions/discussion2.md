@@ -27,6 +27,10 @@
    remove_all [true; false; false] false = [true]
    remove_all [] 42 = []
    ```
+   let rec remove_all lst x =
+      match lst with
+         [] -> []
+         |h::t -> if h == x then remove_all t x else (h::remove_all t x)
 
    ### `index_of lst x`
 
@@ -43,45 +47,58 @@
    index_of [] 42 = -1
    ```
 
-2. Give the type for each of the following OCaml expressions:
+1. Give the type for each of the following OCaml expressions:
 
    > **NOTE:** Feel free to skip around, there are a lot of examples! 🙃
 
    ```ocaml
    [2a] fun a b -> b < a
+   'a -> 'a -> bool
 
    [2b] fun a b -> b + a > b - a
+   int -> int -> bool
 
    [2c] fun a b c -> (int_of_string c) * (b + a)
+   int -> int -> string -> int
 
    [2d] fun a b c -> (if c then a else a) * (b + a)
+   int -> int -> bool -> int
 
    [2e] fun a b c -> [ a + b; if c then a else a + b ]
+   int -> int -> bool -> int
 
    [2f] fun a b c -> if a b != a c then (a b) else (c < 2.0)
+   a is a function
+   (float -> bool) -> float -> float -> bool
 
    [2g] fun a b c d -> if a && b < c then d + 1 else b
+   bool -> int -> int -> int -> int
    ```
 
-3. Write an OCaml expression for each of the following types:
+2. Write an OCaml expression for each of the following types:
 
    ```ocaml
    [3a] int * bool list
+   (5, [true; false])
 
    [3b] (int * float) -> int -> float -> bool list
+   let foo a b c =
+      if a = (1, 2.0) && a = (b, c) then [true] else [false]
 
    [3c] float -> string -> int * bool
+   
 
    [3d] (int -> bool) -> int -> bool list
 
    [3e] ('a -> 'b) -> 'a -> 'a * 'b list
+   fun f a -> (a, [f a])
 
    [3f] ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c
 
    [3g] 'a -> 'b list -> 'a -> 'a * 'a
    ```
 
-4. Give the type of the following OCaml function:
+3. Give the type of the following OCaml function:
 
    ```ocaml
    let rec f p x y =
@@ -91,7 +108,7 @@
       | (_, _) -> failwith "error";;
    ```
 
-5. What values do `x`, `y`, and `z` bind to in the following code snippet?
+4. What values do `x`, `y`, and `z` bind to in the following code snippet?
 
    ```ocaml
    let x = match ("lol", 7) with
@@ -99,6 +116,7 @@
       | ("lol", _)   -> "two"
       | ("lol", 7)   -> "three"
    ;;
+   two
 
    let y = match (2, true) with
       | (1, _)       -> "one"
@@ -106,6 +124,7 @@
       | (_, _)       -> "three"
       | (_, true)    -> "four"
    ;;
+   three
 
    let z = match [1;2;4] with
       | []           -> "one"
@@ -113,6 +132,11 @@
       | 1::2::t      -> "three"
       | _            -> "four"
    ;;
+   three
+
+   let tup = (5, 7) in
+   match tup with
+   |(a, b) -> _____
    ```
 
 More information + examples can be found in the [spring23 OCaml discussion](https://github.com/cmsc330-umd/spring23/tree/main/discussions/d3_ocaml).
