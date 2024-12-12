@@ -7,6 +7,13 @@ type token =
 | Tok_RParen
 | Tok_EOF
 
+let re_int = Str.regexp "-?[0-9]+"
+let re_mult = Str.regexp "\\*"
+let re_plus = Str.regexp "\\+"
+let re_lparen = Str.regexp "("
+let re_rparen = Str.regexp ")"
+let re_space = Str.regexp " "
+
 let string_of_token tok = match tok with
 | Tok_Int(i) -> string_of_int i
 | Tok_Mult -> "*"
